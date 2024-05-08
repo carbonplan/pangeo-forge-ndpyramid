@@ -7,28 +7,14 @@
 </a>
 </p>
 
-# python-project-template
+# Pangeo-Forge-Ndpyramid
 
-A CarbonPlan template for a developing a Python project
+Pangeo-Forge extension library used to generate pyramid via [ndpyramid](https://github.com/carbonplan/ndpyramid)
 
 [![CI](https://github.com/carbonplan/python-project-template/actions/workflows/main.yaml/badge.svg)](https://github.com/carbonplan/python-project-template/actions/workflows/main.yaml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-This CarbonPlan repository contains a template for developing a python project. To start, click on the green [Use this template](https://github.com/carbonplan/python-project-template/generate) button in the top right. This will allow you to create a new project using this base template.
 
-## Modifications
-
-### Updating project name
-
-`scripts` and `tests` contain filler .py files. Update/remove these with your project name.
-
-### Updating workflows/main.yaml
-
-In the workflows/main.yaml file, the pytest and docker sections of the github actions configuration are currently commented out. If you wish to add them, uncomment them.
-
-### Updating requirements.txt
-
-requirements.txt is currently empty. You can populate it with: `pip3 freeze > requirements.txt`
 
 ## license
 

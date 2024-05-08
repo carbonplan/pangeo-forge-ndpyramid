@@ -1,49 +1,37 @@
+# https://pre-commit.com/
 ci:
-  autoupdate_schedule: quarterly
-  autofix_prs: false
-
+  autoupdate_schedule: monthly
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.5.0
+    rev: v4.6.0
     hooks:
       - id: trailing-whitespace
       - id: end-of-file-fixer
-      - id: check-docstring-first
-      - id: check-json
       - id: check-yaml
-      - id: debug-statements
-      - id: mixed-line-ending
-
-  - repo: https://github.com/asottile/pyupgrade
-    rev: v3.15.2
-    hooks:
-      - id: pyupgrade
-        args:
-          - "--py38-plus"
-
-  - repo: https://github.com/psf/black
-    rev: 24.3.0
-    hooks:
-      - id: black
-      - id: black-jupyter
-
-  - repo: https://github.com/keewis/blackdoc
-    rev: v0.3.9
-    hooks:
-      - id: blackdoc
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: "v0.3.5"
+    # Ruff version.
+    rev: "v0.4.3"
     hooks:
+      # Run the linter.
       - id: ruff
-        args: ["--fix"]
+        args: [ --fix ]
+      # Run the formatter.
+      - id: ruff-format
 
-  - repo: https://github.com/pre-commit/mirrors-prettier
-    rev: v4.0.0-alpha.8
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.10.0
     hooks:
-      - id: prettier
-
-  - repo: https://github.com/kynan/nbstripout
-    rev: 0.7.1
-    hooks:
-      - id: nbstripout
+      - id: mypy
+        # Copied from setup.cfg
+        exclude: "properties|asv_bench|docs"
+        additional_dependencies: [
+            # Type stubs
+            types-python-dateutil,
+            types-pkg_resources,
+            types-PyYAML,
+            types-pytz,
+            # Dependencies that are typed
+            numpy,
+            typing-extensions>=4.1.0,
+          ]
