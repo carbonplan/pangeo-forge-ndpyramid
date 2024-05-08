@@ -9,7 +9,7 @@
 
 # Pangeo-Forge-Ndpyramid
 
-Pangeo-Forge extension library used to generate pyramid via [ndpyramid](https://github.com/carbonplan/ndpyramid)
+Pangeo-Forge extension library used to generate pyramids via [ndpyramid](https://github.com/carbonplan/ndpyramid)
 
 [![CI](https://github.com/carbonplan/python-project-template/actions/workflows/main.yaml/badge.svg)](https://github.com/carbonplan/python-project-template/actions/workflows/main.yaml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
