@@ -39,6 +39,6 @@ jobs:
            python -m pip install -e  ".[test]"
 
 
-      # - name: Running Tests
-      #   run: |
-      #     python -m pytest --cov=./ --cov-report=xml --verbose
+      - name: Running Tests
+        run: |
+          python -m pytest --cov=./ --cov-report=xml --verbose
