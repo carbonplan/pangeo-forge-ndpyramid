@@ -7,6 +7,7 @@ from pangeo_forge_recipes.transforms import OpenWithXarray, StoreToZarr
 from pangeo_forge_ndpyramid.transforms import StoreToPyramid
 
 
+# TODO: We should parameterize the reprojection methods available in ndpyramid
 def test_pyramid(
     pyramid_datatree,
     create_file_pattern,
