@@ -30,7 +30,7 @@ def pyramid_datatree(levels: int = 2):
 @pytest.fixture(scope="session")
 def create_file_pattern():
     return pattern_from_file_sequence(
-        [str(path) for path in ["data/nc1.nc", "data/nc2.nc"]],
+        [str(path) for path in ["tests/data/nc1.nc", "tests/data/nc2.nc"]],
         concat_dim="time",
         nitems_per_file=1,
     )
