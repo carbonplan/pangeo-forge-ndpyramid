@@ -21,7 +21,7 @@ classifiers = [
 
 dependencies = [
     "pangeo-forge-recipes",
-    "ndpyramid"
+    "ndpyramid",
 ]
 
 [project.optional-dependencies]
@@ -31,6 +31,9 @@ test = [
     "pytest-cov",
     "pytest",
     "ruff",
+    "rioxarray",
+    "pooch",
+    "xarray-datatree"
 
 ]
 dynamic = ["version"]
