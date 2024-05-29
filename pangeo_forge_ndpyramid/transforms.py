@@ -99,7 +99,7 @@ class StoreToPyramid(beam.PTransform, ZarrWriterMixin):
 
         ds = xr.Dataset(attrs=attrs)
 
-        target_path = (self.target_root / self.store_name).get_mapper()
+        target_path = (self.target_root / self.store_name).get_mapper()  
         ds.to_zarr(store=target_path, compute=False)  # noqa
 
         # generate all pyramid levels

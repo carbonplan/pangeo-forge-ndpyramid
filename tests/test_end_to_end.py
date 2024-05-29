@@ -8,6 +8,7 @@ from pangeo_forge_ndpyramid.transforms import StoreToPyramid
 
 
 # TODO: We should parameterize the reprojection methods available in ndpyramid
+# TODO: Test names and attrs 
 def test_pyramid(
     pyramid_datatree,
     create_file_pattern,

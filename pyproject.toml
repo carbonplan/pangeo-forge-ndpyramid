@@ -22,6 +22,7 @@ classifiers = [
 dependencies = [
     "pangeo-forge-recipes",
     "ndpyramid",
+    "rioxarray"
 ]
 
 [project.optional-dependencies]
