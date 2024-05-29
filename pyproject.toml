@@ -6,7 +6,7 @@ description = "Pangeo Forge extension libary to generate multi-scale pyramids th
 readme = "README.md"
 license = {text = "MIT"}
 authors = [{name = "CarbonPlan", email = "tech@carbonplan.org"}]
-requires-python = ">=3.10"
+requires-python = ">=3.9"
 dynamic = ["version"]
 classifiers = [
     "Development Status :: 4 - Beta",
