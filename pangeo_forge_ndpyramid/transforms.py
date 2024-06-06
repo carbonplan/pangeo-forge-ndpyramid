@@ -22,17 +22,23 @@ class CreatePyramid(beam.PTransform):
     level: int
     epsg_code: Optional[str] = None
     rename_spatial_dims: Optional[dict] = None
-    projection: Literal["coarsen", "regrid", "reproject"] = "reproject"
+    pixels_per_tile: Optional[int] = 128
+    pyramid_method: Literal["coarsen", "regrid", "reproject", "resample"] = "reproject"
     pyramid_kwargs: Optional[dict] = field(default_factory=dict)
 
     def expand(self, pcoll: beam.PCollection) -> beam.PCollection:
-        return pcoll | beam.Map(
-            create_pyramid,
-            level=self.level,
-            epsg_code=self.epsg_code,
-            rename_spatial_dims=self.rename_spatial_dims,
-            projection=self.projection,
-            pyramid_kwargs=self.pyramid_kwargs,
+        return pcoll | beam.MapTuple(
+            lambda k, v: (
+                k,
+                create_pyramid(
+                    v,
+                    level=self.level,
+                    epsg_code=self.epsg_code,
+                    rename_spatial_dims=self.rename_spatial_dims,
+                    pyramid_method=self.pyramid_method,
+                    pyramid_kwargs=self.pyramid_kwargs,
+                ),
+            )
         )
 
 
@@ -51,9 +57,8 @@ class StoreToPyramid(beam.PTransform, ZarrWriterMixin):
         Default is None.
     :param rename_spatial_dims: Dict containing the new spatial dim names for Rioxarray.
         Default is None.
-    :param pyramid_method: type of pyramiding operation. ex: 'coarsen', 'regrid', 'reproject'.
+    :param pyramid_method: type of pyramiding operation. ex: 'coarsen', 'resample', 'regrid', 'reproject'.
         Default is 'reproject'
-
     :param pyramid_kwargs: Dict containing any kwargs that should be passed to ndpyramid.
         Default is None.
 
@@ -69,7 +74,7 @@ class StoreToPyramid(beam.PTransform, ZarrWriterMixin):
     )
     epsg_code: Optional[str] = None
     rename_spatial_dims: Optional[dict] = None
-    projection: Literal["coarsen", "regrid", "reproject"] = "reproject"
+    pyramid_method: Literal["coarsen", "regrid", "reproject", "resample"] = "reproject"
 
     pyramid_kwargs: Optional[dict] = field(default_factory=dict)
 
@@ -88,7 +93,7 @@ class StoreToPyramid(beam.PTransform, ZarrWriterMixin):
                     for i in range(self.levels)
                 ],
                 type="reduce",
-                method=f"pyramid_{self.projection}",
+                method=f"pyramid_{self.pyramid_method}",
                 version=get_version(),
                 kwargs=save_kwargs,
             )
@@ -99,7 +104,7 @@ class StoreToPyramid(beam.PTransform, ZarrWriterMixin):
 
         ds = xr.Dataset(attrs=attrs)
 
-        target_path = (self.target_root / self.store_name).get_mapper()  
+        target_path = (self.target_root / self.store_name).get_mapper()
         ds.to_zarr(store=target_path, compute=False)  # noqa
 
         # generate all pyramid levels
@@ -110,7 +115,7 @@ class StoreToPyramid(beam.PTransform, ZarrWriterMixin):
                 level=lvl,
                 epsg_code=self.epsg_code,
                 rename_spatial_dims=self.rename_spatial_dims,
-                projection=self.projection,
+                pyramid_method=self.pyramid_method,
                 pyramid_kwargs=self.pyramid_kwargs,
             )
             zarr_pyr_path = (
