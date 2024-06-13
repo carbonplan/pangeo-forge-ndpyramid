@@ -69,7 +69,7 @@ class StoreToPyramid(beam.PTransform, ZarrWriterMixin):
     store_name: str
     pixels_per_tile: Optional[int] = 128
     other_chunks: Dict[str, int] = field(default_factory=dict)
-    target_root: Union[FSSpecTarget, RequiredAtRuntimeDefault] = field(
+    target_root: Union[str, FSSpecTarget, RequiredAtRuntimeDefault] = field(
         default_factory=RequiredAtRuntimeDefault
     )
     epsg_code: Optional[str] = None
@@ -107,6 +107,7 @@ class StoreToPyramid(beam.PTransform, ZarrWriterMixin):
         ds = xr.Dataset(attrs=attrs)
 
         # Note: mypy typing in not happy here. 
+
         target_path = (self.target_root / self.store_name).get_mapper() # type: ignore 
         ds.to_zarr(store=target_path, compute=False)  # noqa
 
