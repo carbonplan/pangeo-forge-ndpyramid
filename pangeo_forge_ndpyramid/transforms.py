@@ -3,7 +3,7 @@ from typing import Dict, List, Literal, Optional, Tuple, Union
 
 import apache_beam as beam
 import xarray as xr
-import zarr # type: ignore
+import zarr  # type: ignore
 from pangeo_forge_recipes.patterns import Dimension, Index
 from pangeo_forge_recipes.storage import FSSpecTarget
 from pangeo_forge_recipes.transforms import (
@@ -83,7 +83,7 @@ class StoreToPyramid(beam.PTransform, ZarrWriterMixin):
         datasets: beam.PCollection[Tuple[Index, xr.Dataset]],
     ) -> beam.PCollection[zarr.storage.FSStore]:
         # Add multiscales metadata to the root of the target store
-        from ndpyramid.utils import get_version, multiscales_template # type: ignore
+        from ndpyramid.utils import get_version, multiscales_template  # type: ignore
 
         save_kwargs = {"levels": self.levels, "pixels_per_tile": self.pixels_per_tile}
         attrs = {
@@ -106,9 +106,11 @@ class StoreToPyramid(beam.PTransform, ZarrWriterMixin):
 
         ds = xr.Dataset(attrs=attrs)
 
-        # Note: mypy typing in not happy here. 
-
-        target_path = (self.target_root / self.store_name).get_mapper() # type: ignore 
+        # Note: mypy typing in not happy here.
+    
+        target_path = self.get_full_target().get_mapper()   #(self.target_root / self.store_name)  
+        
+        # type: ignore
         ds.to_zarr(store=target_path, compute=False)  # noqa
 
         # generate all pyramid levels
