@@ -21,7 +21,7 @@ classifiers = [
 
 dependencies = [
     "pangeo-forge-recipes",
-    "ndpyramid@git+https://github.com/carbonplan/ndpyramid@resample-blocks",
+    "ndpyramid",
     "dask",
     "pyresample",
     "rioxarray"
