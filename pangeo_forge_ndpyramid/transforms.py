@@ -107,9 +107,11 @@ class StoreToPyramid(beam.PTransform, ZarrWriterMixin):
         ds = xr.Dataset(attrs=attrs)
 
         # Note: mypy typing in not happy here.
-    
-        target_path = self.get_full_target().get_mapper()   #(self.target_root / self.store_name)  
-        
+
+        target_path = (
+            self.get_full_target().get_mapper()
+        )  # (self.target_root / self.store_name)
+
         # type: ignore
         ds.to_zarr(store=target_path, compute=False)  # noqa
 

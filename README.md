@@ -37,10 +37,10 @@ with beam.Pipeline() as p:
             combine_dims=pattern.combine_dim_keys,
         )
     )
-    
 
 
-``` 
+
+```
 
 ## license
 

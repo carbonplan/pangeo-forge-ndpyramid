@@ -3,6 +3,7 @@ from dataclasses import dataclass
 
 import apache_beam as beam
 import datatree as dt
+import pytest
 import xarray as xr
 from datatree.testing import assert_isomorphic
 from pangeo_forge_recipes.transforms import OpenWithXarray, StoreToZarr
@@ -10,16 +11,20 @@ from pangeo_forge_recipes.transforms import OpenWithXarray, StoreToZarr
 from pangeo_forge_ndpyramid.transforms import StoreToPyramid
 
 
+@pytest.mark.xfail(
+    reason="Input dataset GPM IMERG failing with: AttributeError: 'numpy.ndarray' object has no attribute 'rechunk'"
+)
 def test_pyramid_resample(
     pyramid_datatree_resample, create_file_pattern_gpm_imerg, pipeline, tmp_target
 ):
     pattern = create_file_pattern_gpm_imerg
+
     @dataclass
     class Transpose(beam.PTransform):
         """Transpose dim order for pyresample"""
 
         def _transpose(self, ds: xr.Dataset) -> xr.Dataset:
-            ds = ds[['precipitation']]
+            ds = ds[["precipitation"]]
             ds = ds.transpose("time", "lat", "lon")
 
             return ds

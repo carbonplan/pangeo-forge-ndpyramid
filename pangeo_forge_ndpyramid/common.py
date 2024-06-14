@@ -1,7 +1,7 @@
 from typing import Literal, Optional
 
 import xarray as xr
-import zarr # type: ignore
+import zarr  # type: ignore
 
 
 def create_pyramid(
@@ -13,7 +13,7 @@ def create_pyramid(
     pyramid_method: Literal["coarsen", "regrid", "reproject", "resample"] = "reproject",
     pyramid_kwargs: Optional[dict] = {},
 ) -> zarr.storage.FSStore:
-    from ndpyramid.utils import set_zarr_encoding # type: ignore
+    from ndpyramid.utils import set_zarr_encoding  # type: ignore
 
     if pyramid_method not in ["reproject", "resample"]:
         raise NotImplementedError(
@@ -32,12 +32,12 @@ def create_pyramid(
         ds = ds.rename(rename_spatial_dims)
 
     if pyramid_method == "reproject":
-        from ndpyramid.reproject import level_reproject # type: ignore
+        from ndpyramid.reproject import level_reproject  # type: ignore
 
         level_ds = level_reproject(ds, level=level, **pyramid_kwargs)
 
     elif pyramid_method == "resample":
-        from ndpyramid.resample import level_resample # type: ignore
+        from ndpyramid.resample import level_resample  # type: ignore
 
         # Should we have resample specific kwargs we pass here?
         level_ds = level_resample(
