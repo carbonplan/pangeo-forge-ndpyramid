@@ -1,6 +1,5 @@
 name: Build distribution
 on:
-  pull_request:
   release:
     types:
       - published
