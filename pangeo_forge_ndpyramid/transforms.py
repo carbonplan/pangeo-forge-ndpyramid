@@ -137,6 +137,7 @@ class StoreToPyramid(beam.PTransform, ZarrWriterMixin):
                 )
                 | f"Consolidate Dimension Coordinates for: {lvl}"
                 >> ConsolidateDimensionCoordinates()
+                | ConsolidateMetadata()
             )
 
             transform_pyr_lvls.append(zarr_pyr_path)
