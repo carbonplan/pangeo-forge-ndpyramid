@@ -14,9 +14,20 @@
 [![CI](https://github.com/carbonplan/python-project-template/actions/workflows/main.yaml/badge.svg)](https://github.com/carbonplan/python-project-template/actions/workflows/main.yaml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
+
+
 ## Usage
 
-`pangeo-forge-ndpyramid` contains a apache-beam transform named `StoreToPyramid` which can be used with `pangeo-forge-recipes` to generate multiscale Zarr stores.
+`pangeo-forge-ndpyramid` contains an apache-beam transform named `StoreToPyramid` which can be used with `pangeo-forge-recipes` to generate multiscale Zarr stores.
+The two current implimented `ndpyramid` methods are `reproject` and `resample`.
+
+
+### Examples
+
+Examples for creating pyramids via pangeo-forge can be found in `notebooks/reproject_demo.ipynb` and `notebooks/resample.ipynb`.
+
+
+
 ```python
 
 from pangeo_forge_ndpyramid import StoreToPyramid
@@ -33,7 +44,9 @@ with beam.Pipeline() as p:
             target_root=target_root,
             store_name='pyramid_store.zarr',
             epsg_code='4326',
-            levels=3,
+            pyramid_method="resample",
+            pyramid_kwargs={"x": "longitude", "y": "latitude"},
+            levels=2,
             combine_dims=pattern.combine_dim_keys,
         )
     )
