@@ -11,9 +11,7 @@ from pangeo_forge_recipes.transforms import OpenWithXarray, StoreToZarr
 from pangeo_forge_ndpyramid.transforms import StoreToPyramid
 
 
-@pytest.mark.xfail(
-    reason="Input dataset GPM IMERG failing with: AttributeError: 'numpy.ndarray' object has no attribute 'rechunk'"
-)
+@pytest.mark.xfail(reason="local files not commited. ToDo")
 def test_pyramid_resample(
     pyramid_datatree_resample, create_file_pattern_gpm_imerg, pipeline, tmp_target
 ):
@@ -25,6 +23,7 @@ def test_pyramid_resample(
 
         def _transpose(self, ds: xr.Dataset) -> xr.Dataset:
             ds = ds[["precipitation"]]
+            ds = ds.chunk({"time": 1, "lat": 100, "lon": 100})
             ds = ds.transpose("time", "lat", "lon")
 
             return ds
@@ -51,6 +50,8 @@ def test_pyramid_resample(
                 combine_dims=pattern.combine_dim_keys,
             )
         )
+    # import pdb; pdb.set_trace()
+
     pgf_dt = dt.open_datatree(
         os.path.join(tmp_target.root_path, "pyramid"),
         engine="zarr",

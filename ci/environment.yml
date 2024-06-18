@@ -1,0 +1,10 @@
+name: pangeo-forge-ndpyramid-tests
+channels:
+  - conda-forge
+  - nodefaults
+dependencies:
+  - pangeo-forge-recipes
+  - ndpyramid
+  - dask
+  - pyresample
+  - rioxarray
