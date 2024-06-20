@@ -1,0 +1,13 @@
+name: pangeo-forge-ndpyramid-tests
+channels:
+  - conda-forge
+  - nodefaults
+dependencies:
+  - pangeo-forge-recipes
+  - pip 
+  - dask
+  - pyresample
+  - rioxarray
+  - pip:
+    - ndpyramid@git+https://github.com/carbonplan/ndpyramid
+
