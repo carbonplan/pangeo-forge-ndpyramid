@@ -1,0 +1,17 @@
+name: demo
+channels:
+  - conda-forge
+  - nodefaults
+dependencies:
+  - dask
+  - fsspec
+  - matplotlib
+  - pangeo-forge-recipes
+  - pip 
+  - pyresample
+  - rioxarray
+  - xarray-datatree
+  - pip:
+    - ndpyramid@git+https://github.com/carbonplan/ndpyramid
+    - pangeo-forge-ndpyramid@git+https://github.com/carbonplan/pangeo-forge-ndpyramid
+
