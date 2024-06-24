@@ -78,7 +78,7 @@ jobs:
           python -m pip install dist/pangeo_forge_ndpyramid*.whl
           python -c "import pangeo_forge_ndpyramid; print(pangeo_forge_ndpyramid.__version__)"
       - name: Publish package to TestPyPI
-        uses: pypa/gh-action-pypi-publish@v1.8.14
+        uses: pypa/gh-action-pypi-publish@v1.9.0
         with:
           repository-url: https://test.pypi.org/legacy/
           # verbose: true
@@ -98,4 +98,4 @@ jobs:
           name: releases
           path: dist
       - name: Publish package to PyPI
-        uses: pypa/gh-action-pypi-publish@v1.8.14
+        uses: pypa/gh-action-pypi-publish@v1.9.0
