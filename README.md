@@ -21,14 +21,12 @@
 `pangeo-forge-ndpyramid` contains an apache-beam transform named `StoreToPyramid` which can be used with `pangeo-forge-recipes` to generate multiscale Zarr stores.
 The two current implemented `ndpyramid` methods are `reproject` and `resample`.
 
+
 ### Examples
 
 Examples for creating pyramids via pangeo-forge can be found in `notebooks/reproject_demo.ipynb` and `notebooks/resample.ipynb`.
 
 
-
-
-```
 
 ## license
 
