@@ -19,37 +19,12 @@
 ## Usage
 
 `pangeo-forge-ndpyramid` contains an apache-beam transform named `StoreToPyramid` which can be used with `pangeo-forge-recipes` to generate multiscale Zarr stores.
-The two current implimented `ndpyramid` methods are `reproject` and `resample`.
-
+The two current implemented `ndpyramid` methods are `reproject` and `resample`.
 
 ### Examples
 
 Examples for creating pyramids via pangeo-forge can be found in `notebooks/reproject_demo.ipynb` and `notebooks/resample.ipynb`.
 
-
-
-```python
-
-from pangeo_forge_ndpyramid import StoreToPyramid
-
-...
-
-with beam.Pipeline() as p:
-    (
-        p
-        | beam.Create(pattern.items())
-        | OpenURLWithFSSpec()
-        | OpenWithXarray()
-        | 'Write Pyramid Levels' >> StoreToPyramid(
-            target_root=target_root,
-            store_name='pyramid_store.zarr',
-            epsg_code='4326',
-            pyramid_method="resample",
-            pyramid_kwargs={"x": "longitude", "y": "latitude"},
-            levels=2,
-            combine_dims=pattern.combine_dim_keys,
-        )
-    )
 
 
 
