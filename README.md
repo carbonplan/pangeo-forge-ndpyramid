@@ -16,6 +16,12 @@
 
 
 
+# Installation
+
+```pip install pangeo-forge-ndpyramid```
+
+
+
 ## Usage
 
 `pangeo-forge-ndpyramid` contains an apache-beam transform named `StoreToPyramid` which can be used with `pangeo-forge-recipes` to generate multiscale Zarr stores.
