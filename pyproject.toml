@@ -58,6 +58,7 @@ write_to_template = '__version__ = "{version}"'
 
 # [tool.setuptools.dynamic]
 # version = { attr = "pangeo_forge_ndpyramid.__version__" }
+
 [tool.setuptools.packages.find]
 exclude = ["docs", "tests", "tests.*", "docs.*"]
 
