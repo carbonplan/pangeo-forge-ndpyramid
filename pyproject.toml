@@ -1,5 +1,9 @@
 
 
+[build-system]
+requires = ["setuptools>=64", "setuptools-scm[toml]>=6.2", "wheel"]
+build-backend = "setuptools.build_meta" 
+
 [project]
 name = "pangeo-forge-ndpyramid"
 description = "Pangeo Forge extension libary to generate multi-scale pyramids through pangeo-forge-recipes."
@@ -42,18 +46,18 @@ test = [
 dynamic = ["version"]
 
 
-[build-system]
-requires = [
-    "setuptools>=64",
-    "setuptools-scm[toml]>=6.2"
-]
-build-backend = "setuptools.build_meta"
 
 
 [tool.setuptools_scm]
-local_scheme = "guess-next-dev"
-fallback_version = "9999"
+version_scheme = "post-release"
+local_scheme = "node-and-date"
+fallback_version = "999"
+write_to = "pangeo_forge_ndpyramid/_version.py"
+write_to_template = '__version__ = "{version}"'
 
+
+# [tool.setuptools.dynamic]
+# version = { attr = "pangeo_forge_ndpyramid.__version__" }
 [tool.setuptools.packages.find]
 exclude = ["docs", "tests", "tests.*", "docs.*"]
 
